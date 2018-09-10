@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script  src="js/react.production.min.js"></script>
+    <script  src="js/react-dom.production.min.js"></script>
+    <script  src="js/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //extends 继承
+        class King extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    num:100
+                }
+                this.reduce = this.reduce.bind(this)
+            }
+            reduce(){
+                this.setState({
+                    num:this.state.num-10
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <p>全部士兵数量:{this.state.num}</p>
+                        <Jiang solider={100} addF={this.reduce}/>
+                    </div>
+                    
+                )
+            }
+        }
+
+        class Jiang extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    solider:this.props.solider
+                }
+                this.add = this.add.bind(this)
+            }
+            add(){
+                this.setState({
+                    solider:this.state.solider+10
+                })
+                //调用
+                this.props.addF()
+            }
+            render(){
+                return(
+                    <div>
+                        <p>将军a有士兵:{this.state.solider}</p>
+                        <button onClick={this.add}>调兵</button>
+                    </div>
+                    
+                )
+            }
+        }
+        
+
+        
+        ReactDOM.render(
+            <King />,
+            document.getElementById('root')
+        );
+            
+        
+    </script>
+</body>
+</html>

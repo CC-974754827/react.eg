@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script  src="js/react.production.min.js"></script>
+    <script  src="js/react-dom.production.min.js"></script>
+    <script  src="js/browser.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class TestForm extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    val:""
+                }
+            }
+            change(even){
+                // console.log(even.target.value)
+                this,setState({
+                    val:even.target.value
+                })
+            }
+            //阻止默认行为，阻止提交
+            handleSubmit(even){
+                event.preventDefault();
+            }
+
+            render(){
+                return(
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <input type="text" onChange={this.change.bind(this)}/>
+                        {this.state.val}
+                        <input type="submit" value="提交"/>
+                    </form>
+                   
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TestForm/>,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
