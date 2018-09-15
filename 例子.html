@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+    <!-- bootstrap -->
     <div id="root"></div>
     <script type="text/babel">
         let arr = ['待办事项','待办时间','预计用时'];
@@ -49,19 +50,33 @@
             constructor(props){
                 super(props);
                 this.state={
-
+                    info:"",
+                    time:"",
+                    count:""
                 }
+                this.change = this.change.bind(this);
+                this.onsubmit = this.onsubmit.bind(this);
             }
-
+            change(even){
+                // console.log(even.target.value);
+                // []作为变量
+                this.setState({
+                    [even.target.name]:even.target.value
+                })
+            }
+            onsubmit(){
+                //阻止默认行为
+                event.preventDefault();
+            }
             render(){
                 return(
                     <div>
                         <ul className="list">{list}</ul>
                         <br/>
-                        <form className="form">
-                            <input type="text" placeholder=" 待办事项"/>
-                            <input type="text" placeholder=" 年/月/日"/>
-                            <input type="text" placeholder=" 预计用时"/>
+                        <form className="form" onSubmit={this.onsubmit}>
+                            <input type="text" name="info" onChange={this.change} placeholder=" 待办事项"/>
+                            <input type="date" name="time" onChange={this.change} placeholder=" 年/月/日"/>
+                            <input type="text" name="count" onChange={this.change} placeholder=" 预计用时"/>
                         </form>
                         <br/>
                         <button className="btn">添加</button>
@@ -77,7 +92,7 @@
                 this.state={
                     isOpacity: true
                 }
-                this.clearC = this.clearC.bind(this);
+                this.clearC = this.clearC.bind(this)]
             }
 
             clearC(){
